@@ -56,6 +56,15 @@ The `--process` parameter must be the exact executable name of the game you want
 
 For real-time games like Rocket League that require continuous gameplay without pausing, the system is configured with `async_mode=True` by default in `play.py`. This allows the game to run continuously without frame-by-frame pausing, providing smoother gameplay experience.
 
+### Rocket League Tips
+
+For best results with Rocket League:
+1. Use the exact process name: `RocketLeague.exe` (check Task Manager)
+2. Start the game and enter a match or training mode before launching the AI
+3. The AI works best in modes with consistent camera angles (e.g., training, 1v1)
+4. Ensure your game is running at a stable frame rate (60 FPS or higher recommended)
+5. The model runs at 60 FPS by default (`env_fps=60` in `play.py`), which provides responsive control
+
 # Paper and Citation
 
 If you find our work useful, please consider citing us!

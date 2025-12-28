@@ -519,8 +519,12 @@ class GamepadEnv(Env):
 
         if self.async_mode:
             # In async mode, the game runs continuously without pausing
-            # Just wait for the step duration
-            time.sleep(self.step_duration)
+            # Use precise timing for accurate action duration
+            start = time.perf_counter()
+            end = start + self.step_duration
+            now = time.perf_counter()
+            while now < end:
+                now = time.perf_counter()
         else:
             # In sync mode, pause and unpause for each step
             start = time.perf_counter()
