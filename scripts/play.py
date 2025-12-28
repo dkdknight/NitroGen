@@ -136,8 +136,28 @@ if args.process == "Cuphead.exe":
         press("EAST")
         time.sleep(0.3)
 
+# Rocket League specific initialization
+if args.process.lower() in ["rocketleague.exe", "rocketleague"]:
+    print(f"GamepadEnv ready for Rocket League at {env.env_fps} FPS")
+    print("Make sure you are in a match or training mode before starting.")
+    input("Press enter when ready to start the AI agent...")
+    
+    # Give the controller a moment to be recognized
+    env.gamepad_emulator.wakeup(duration=0.2)
+    time.sleep(1)
+    
+    print("Starting Rocket League AI in 3 seconds...")
+    for i in range(3):
+        print(f"{3 - i}...")
+        time.sleep(1)
+
 env.reset()
-env.pause()
+if env.async_mode:
+    # In async mode, unpause the game and let it run continuously
+    env.unpause()
+else:
+    # In sync mode, start with the game paused
+    env.pause()
 
 
 # Initial call to get state
