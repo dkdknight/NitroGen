@@ -516,7 +516,7 @@ class GamepadEnv(Env):
         duration (float): Duration for the action step.
         """
         self.gamepad_emulator.step(action)
-        
+
         if self.async_mode:
             # In async mode, the game runs continuously without pausing
             # Just wait for the step duration

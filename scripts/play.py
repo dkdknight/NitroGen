@@ -145,8 +145,6 @@ else:
     env.pause()
 
 
-
-
 # Initial call to get state
 obs, reward, terminated, truncated, info = env.step(action=zero_action)
 
