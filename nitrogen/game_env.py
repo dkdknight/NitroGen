@@ -9,8 +9,6 @@ from gymnasium import Env
 from gymnasium.spaces import Box, Dict, Discrete
 from PIL import Image
 
-import time
-
 import vgamepad as vg
 
 import psutil
@@ -522,9 +520,9 @@ class GamepadEnv(Env):
             # Use precise timing for accurate action duration
             start = time.perf_counter()
             end = start + self.step_duration
-            now = time.perf_counter()
-            while now < end:
-                now = time.perf_counter()
+            # Busy-wait for precise timing, with small sleep to reduce CPU usage
+            while time.perf_counter() < end:
+                time.sleep(0.0001)  # 0.1ms sleep to reduce CPU without hurting timing precision
         else:
             # In sync mode, pause and unpause for each step
             start = time.perf_counter()
