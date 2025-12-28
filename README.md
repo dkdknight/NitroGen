@@ -43,12 +43,18 @@ First, start an inference server for the model:
 python scripts/serve.py <path_to_ng.pt>  
 ```
 
+When the server starts, it will display a list of available games from the model's training data and prompt you to select one by entering its ID number. You can leave this empty to run in unconditional mode (no specific game conditioning).
+
 Then, run the agent on the game of your choice:
 ```bash
 python scripts/play.py --process '<game_executable_name>.exe'
 ```
 
 The `--process` parameter must be the exact executable name of the game you want to play. You can find it by right-clicking on the game process in Windows Task Manager (Ctrl+Shift+Esc), and selecting `Properties`. The process name should be in the `General` tab and end with `.exe`.
+
+## Performance Optimization
+
+For real-time games like Rocket League that require continuous gameplay without pausing, the system is configured with `async_mode=True` by default in `play.py`. This allows the game to run continuously without frame-by-frame pausing, providing smoother gameplay experience.
 
 # Paper and Citation
 
