@@ -16,6 +16,11 @@ NitroGen is an open foundation model for generalist gaming agents. This multi-ga
 
 NitroGen is trained through behavior cloning on the largest video-action gameplay dataset, assembled exclusively from internet videos. It can be adapted via post-training to unseen games.
 
+## 📚 Additional Documentation
+
+- **[Games and Training Information](GAMES_AND_TRAINING.md)** - Detailed information about supported games, dataset, and training
+- **[Informations sur les Jeux et l'Entraînement (Français)](JEUX_ET_ENTRAINEMENT.md)** - Version française de la documentation
+
 # Installation
 
 ## Prerequisites
