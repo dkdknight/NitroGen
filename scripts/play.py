@@ -137,7 +137,14 @@ if args.process == "Cuphead.exe":
         time.sleep(0.3)
 
 env.reset()
-env.pause()
+if env.async_mode:
+    # In async mode, unpause the game and let it run continuously
+    env.unpause()
+else:
+    # In sync mode, start with the game paused
+    env.pause()
+
+
 
 
 # Initial call to get state

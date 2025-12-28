@@ -381,7 +381,8 @@ class GamepadEnv(Env):
     controller_type (str): Platform for the gamepad emulator ("xbox" or "ps4").
     game_speed (float): Speed multiplier for the game.
     env_fps (int): Number of actions to perform per second at normal speed.
-    async_mode (bool): Whether to pause/unpause the game during each step.
+    async_mode (bool): If True, the game runs continuously without pausing between steps.
+                       If False, the game is paused and unpaused for each step (synchronous mode).
     """
 
     def __init__(
@@ -508,21 +509,28 @@ class GamepadEnv(Env):
 
     def perform_action(self, action, duration):
         """
-        Perform the action without handling the game pause/unpause.
+        Perform the action with or without game pause/unpause based on async_mode.
 
         Parameters:
         action (dict): Action to be performed.
         duration (float): Duration for the action step.
         """
         self.gamepad_emulator.step(action)
-        start = time.perf_counter()
-        self.unpause()
-        # Wait until the next step
-        end = start + self.step_duration
-        now = time.perf_counter()
-        while now < end:
+        
+        if self.async_mode:
+            # In async mode, the game runs continuously without pausing
+            # Just wait for the step duration
+            time.sleep(self.step_duration)
+        else:
+            # In sync mode, pause and unpause for each step
+            start = time.perf_counter()
+            self.unpause()
+            # Wait until the next step
+            end = start + self.step_duration
             now = time.perf_counter()
-        self.pause()
+            while now < end:
+                now = time.perf_counter()
+            self.pause()
 
     def step(self, action, step_duration=None):
         """
